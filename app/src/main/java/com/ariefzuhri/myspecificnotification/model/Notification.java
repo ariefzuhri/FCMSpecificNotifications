@@ -8,5 +8,5 @@ public class Notification {
     public Notification(String title, String message) {
         this.message = message;
         this.title = title;
-    ***REMOVED***
-***REMOVED***
+    }
+}

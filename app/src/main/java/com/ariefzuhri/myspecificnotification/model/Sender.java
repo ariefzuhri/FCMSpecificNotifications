@@ -10,5 +10,5 @@ public class Sender {
     public Sender(Notification data, String to) {
         this.data = data;
         this.to = to;
-    ***REMOVED***
-***REMOVED***
+    }
+}
