@@ -21,6 +21,7 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+// Authentication sample with Firebase
 public class LoginActivity extends AppCompatActivity {
 
     private final String TAG = getClass().getSimpleName();
@@ -71,7 +72,6 @@ public class LoginActivity extends AppCompatActivity {
         firebaseAuth.signInWithCredential(authCredential).addOnCompleteListener(task -> {
             if (task.isSuccessful()){
                 Log.d(TAG, "signInWithCredential: success");
-
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
                 finish();

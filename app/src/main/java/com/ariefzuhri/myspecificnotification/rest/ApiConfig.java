@@ -5,9 +5,8 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static com.ariefzuhri.myspecificnotification.utils.Constants.CLIENT_BASE_URL;
+import static com.ariefzuhri.myspecificnotification.utils.Constants.FCM_BASE_URL;
 
-// Kelas ini menangani pengiriman notifikasi (dipanggil tiap kali mengirim notifikasi)
 public class ApiConfig {
 
     public static ApiService getApiService(){
@@ -19,7 +18,7 @@ public class ApiConfig {
                 .build();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(CLIENT_BASE_URL)
+                .baseUrl(FCM_BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build();
