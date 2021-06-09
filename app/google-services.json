@@ -4,15 +4,15 @@
     "firebase_url": "https://***REMOVED***.firebaseio.com",
     "project_id": "***REMOVED***",
     "storage_bucket": "***REMOVED***.appspot.com"
-  ***REMOVED***,
+  },
   "client": [
     {
       "client_info": {
         "mobilesdk_app_id": "1:***REMOVED***:android:44c5143a159a8b1d3d77ae",
         "android_client_info": {
           "package_name": "com.ariefzuhri.myauthentication"
-        ***REMOVED***
-      ***REMOVED***,
+        }
+      },
       "oauth_client": [
         {
           "client_id": "***REMOVED***-lk5cvas32g4o7mpgfegvacg78lad6qs9.apps.googleusercontent.com",
@@ -20,17 +20,17 @@
           "android_info": {
             "package_name": "com.ariefzuhri.myauthentication",
             "certificate_hash": "***REMOVED***"
-          ***REMOVED***
-        ***REMOVED***,
+          }
+        },
         {
           "client_id": "***REMOVED***-3132q5quvsuloaqo6osecvtkbts57s4r.apps.googleusercontent.com",
           "client_type": 3
-        ***REMOVED***
+        }
       ],
       "api_key": [
         {
           "current_key": "***REMOVED***"
-        ***REMOVED***
+        }
       ],
       "services": {
         "appinvite_service": {
@@ -38,18 +38,18 @@
             {
               "client_id": "***REMOVED***-3132q5quvsuloaqo6osecvtkbts57s4r.apps.googleusercontent.com",
               "client_type": 3
-            ***REMOVED***
+            }
           ]
-        ***REMOVED***
-      ***REMOVED***
-    ***REMOVED***,
+        }
+      }
+    },
     {
       "client_info": {
         "mobilesdk_app_id": "1:***REMOVED***:android:cb89b8bc68104fa53d77ae",
         "android_client_info": {
           "package_name": "com.ariefzuhri.myfirestore"
-        ***REMOVED***
-      ***REMOVED***,
+        }
+      },
       "oauth_client": [
         {
           "client_id": "***REMOVED***-5fbs69jr7dipmgcmvf9ss4drad1j2u7s.apps.googleusercontent.com",
@@ -57,17 +57,17 @@
           "android_info": {
             "package_name": "com.ariefzuhri.myfirestore",
             "certificate_hash": "***REMOVED***"
-          ***REMOVED***
-        ***REMOVED***,
+          }
+        },
         {
           "client_id": "***REMOVED***-3132q5quvsuloaqo6osecvtkbts57s4r.apps.googleusercontent.com",
           "client_type": 3
-        ***REMOVED***
+        }
       ],
       "api_key": [
         {
           "current_key": "***REMOVED***"
-        ***REMOVED***
+        }
       ],
       "services": {
         "appinvite_service": {
@@ -75,18 +75,18 @@
             {
               "client_id": "***REMOVED***-3132q5quvsuloaqo6osecvtkbts57s4r.apps.googleusercontent.com",
               "client_type": 3
-            ***REMOVED***
+            }
           ]
-        ***REMOVED***
-      ***REMOVED***
-    ***REMOVED***,
+        }
+      }
+    },
     {
       "client_info": {
         "mobilesdk_app_id": "1:***REMOVED***:android:4c01790c0bb765153d77ae",
         "android_client_info": {
           "package_name": "com.ariefzuhri.myrealtimechat"
-        ***REMOVED***
-      ***REMOVED***,
+        }
+      },
       "oauth_client": [
         {
           "client_id": "***REMOVED***-q6aonvmlfdafpd2mhd6m3l7i9k86o75g.apps.googleusercontent.com",
@@ -94,17 +94,17 @@
           "android_info": {
             "package_name": "com.ariefzuhri.myrealtimechat",
             "certificate_hash": "***REMOVED***"
-          ***REMOVED***
-        ***REMOVED***,
+          }
+        },
         {
           "client_id": "***REMOVED***-3132q5quvsuloaqo6osecvtkbts57s4r.apps.googleusercontent.com",
           "client_type": 3
-        ***REMOVED***
+        }
       ],
       "api_key": [
         {
           "current_key": "***REMOVED***"
-        ***REMOVED***
+        }
       ],
       "services": {
         "appinvite_service": {
@@ -112,18 +112,18 @@
             {
               "client_id": "***REMOVED***-3132q5quvsuloaqo6osecvtkbts57s4r.apps.googleusercontent.com",
               "client_type": 3
-            ***REMOVED***
+            }
           ]
-        ***REMOVED***
-      ***REMOVED***
-    ***REMOVED***,
+        }
+      }
+    },
     {
       "client_info": {
         "mobilesdk_app_id": "1:***REMOVED***:android:545ed7334e1b42393d77ae",
         "android_client_info": {
           "package_name": "com.ariefzuhri.myspecificnotification"
-        ***REMOVED***
-      ***REMOVED***,
+        }
+      },
       "oauth_client": [
         {
           "client_id": "***REMOVED***-671sd3cgkj34a6f7olpohbfpdcmva1o0.apps.googleusercontent.com",
@@ -131,17 +131,17 @@
           "android_info": {
             "package_name": "com.ariefzuhri.myspecificnotification",
             "certificate_hash": "***REMOVED***"
-          ***REMOVED***
-        ***REMOVED***,
+          }
+        },
         {
           "client_id": "***REMOVED***-3132q5quvsuloaqo6osecvtkbts57s4r.apps.googleusercontent.com",
           "client_type": 3
-        ***REMOVED***
+        }
       ],
       "api_key": [
         {
           "current_key": "***REMOVED***"
-        ***REMOVED***
+        }
       ],
       "services": {
         "appinvite_service": {
@@ -149,18 +149,18 @@
             {
               "client_id": "***REMOVED***-3132q5quvsuloaqo6osecvtkbts57s4r.apps.googleusercontent.com",
               "client_type": 3
-            ***REMOVED***
+            }
           ]
-        ***REMOVED***
-      ***REMOVED***
-    ***REMOVED***,
+        }
+      }
+    },
     {
       "client_info": {
         "mobilesdk_app_id": "1:***REMOVED***:android:b0ba830054194a123d77ae",
         "android_client_info": {
           "package_name": "com.ariefzuhri.mystorage"
-        ***REMOVED***
-      ***REMOVED***,
+        }
+      },
       "oauth_client": [
         {
           "client_id": "***REMOVED***-88if2merv2q8bj6sc3htd002h80nfrps.apps.googleusercontent.com",
@@ -168,17 +168,17 @@
           "android_info": {
             "package_name": "com.ariefzuhri.mystorage",
             "certificate_hash": "***REMOVED***"
-          ***REMOVED***
-        ***REMOVED***,
+          }
+        },
         {
           "client_id": "***REMOVED***-3132q5quvsuloaqo6osecvtkbts57s4r.apps.googleusercontent.com",
           "client_type": 3
-        ***REMOVED***
+        }
       ],
       "api_key": [
         {
           "current_key": "***REMOVED***"
-        ***REMOVED***
+        }
       ],
       "services": {
         "appinvite_service": {
@@ -186,11 +186,11 @@
             {
               "client_id": "***REMOVED***-3132q5quvsuloaqo6osecvtkbts57s4r.apps.googleusercontent.com",
               "client_type": 3
-            ***REMOVED***
+            }
           ]
-        ***REMOVED***
-      ***REMOVED***
-    ***REMOVED***
+        }
+      }
+    }
   ],
   "configuration_version": "1"
-***REMOVED***
+}

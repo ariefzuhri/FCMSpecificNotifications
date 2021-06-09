@@ -16,9 +16,9 @@ public interface ApiService {
             {
                     "Content-Type:application/json",
                     "Authorization:key=" + SERVER_KEY
-            ***REMOVED***
+            }
     )
 
     @POST("fcm/send")
     Call<MyResponse> sendNotification(@Body Sender body);
-***REMOVED***
+}

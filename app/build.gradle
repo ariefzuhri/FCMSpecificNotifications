@@ -1,67 +1,67 @@
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
+plugins {
+    id 'com.android.application'
+    id 'com.google.gms.google-services'
+}
 
-***REMOVED***
-***REMOVED***
-***REMOVED***
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
 
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
+    defaultConfig {
+        applicationId "com.ariefzuhri.myspecificnotification"
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0.0"
 
-***REMOVED***
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField("String" , "SERVER_KEY" , '"***REMOVED***"')
-    ***REMOVED***
+    }
 
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-        ***REMOVED***
-    ***REMOVED***
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
 
-***REMOVED***
-***REMOVED***
-***REMOVED***
-    ***REMOVED***
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 
-***REMOVED***
-***REMOVED***
-    ***REMOVED***
-***REMOVED***
+    buildFeatures {
+        viewBinding true
+    }
+}
 
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
+dependencies {
+    // Android support
+    implementation "androidx.appcompat:appcompat:$appCompatVersion"
+    implementation "com.google.android.material:material:$materialVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
 
-***REMOVED***
-***REMOVED***
+    // Testing
+    testImplementation "junit:junit:$junitVersion"
     androidTestImplementation "androidx.test.ext:junit:$junitExtversion"
-***REMOVED***
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
 
-***REMOVED***
-***REMOVED***
+    // Networking
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
 
-***REMOVED***
-***REMOVED***
+    // Parsing the JSON format
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
 
-***REMOVED***
-***REMOVED***
+    // Network logging
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
 
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
+    // Firebase
+    implementation platform("com.google.firebase:firebase-bom:$firebaseVersion")
+    implementation "com.google.firebase:firebase-analytics"
+    implementation "com.google.firebase:firebase-auth"
+    implementation "com.google.firebase:firebase-database"
+    implementation "com.google.firebase:firebase-core"
+    implementation "com.google.firebase:firebase-messaging"
+    implementation "com.google.android.gms:play-services-auth:$playServicesAuthVersion"
+}

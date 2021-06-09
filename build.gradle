@@ -3,32 +3,32 @@ buildscript {
     ext {
         gradleVersion = '4.2.1'
         googleServicesVersion = '4.3.8'
-    ***REMOVED***
+    }
 
     repositories {
         google()
         mavenCentral()
-    ***REMOVED***
+    }
 
-    ***REMOVED***
+    dependencies {
         classpath "com.android.tools.build:gradle:$gradleVersion"
         classpath "com.google.gms:google-services:$googleServicesVersion"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
-    ***REMOVED***
-***REMOVED***
+    }
+}
 
 allprojects {
     repositories {
         google()
         mavenCentral()
-    ***REMOVED***
-***REMOVED***
+    }
+}
 
 task clean(type: Delete) {
     delete rootProject.buildDir
-***REMOVED***
+}
 
 ext {
     // Dependencies version
@@ -45,4 +45,4 @@ ext {
 
     firebaseVersion = '28.0.1'
     playServicesAuthVersion = '19.0.0'
-***REMOVED***
+}

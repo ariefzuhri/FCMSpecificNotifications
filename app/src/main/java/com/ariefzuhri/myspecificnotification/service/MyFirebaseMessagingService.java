@@ -39,7 +39,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
         showNotification(remoteMessage);
-    ***REMOVED***
+    }
 
     private void showNotification(RemoteMessage remoteMessage) {
         String channelId = "channel_new_notification";
@@ -62,7 +62,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 .setContentText(message)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(message))
                 .setColor(ContextCompat.getColor(this, android.R.color.transparent))
-                //.setVibrate(new long[]{1000, 1000, 1000, 1000, 1000***REMOVED***)
+                //.setVibrate(new long[]{1000, 1000, 1000, 1000, 1000})
                 .setSound(defaultSoundUri)
                 .setAutoCancel(true);
 
@@ -70,15 +70,18 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             NotificationChannel notificationChannel = new NotificationChannel(channelId,
                     channelName, NotificationManager.IMPORTANCE_HIGH); // You can change notification priority here
             //channel.enableVibration(true);
-            //channel.setVibrationPattern(new long[]{1000, 1000, 1000, 1000, 1000***REMOVED***);
+            //channel.setVibrationPattern(new long[]{1000, 1000, 1000, 1000, 1000});
             builder.setChannelId(channelId);
             if (notificationManager != null)
                 notificationManager.createNotificationChannel(notificationChannel);
-        ***REMOVED***
+        }
 
         Notification notification = builder.build();
-        if (notificationManager != null) notificationManager.notify(REQUEST_MY_NOTIFICATION, notification);
-    ***REMOVED***
+        if (notificationManager != null) {
+            int randomNotificationId = new Random().nextInt(); // Keep multiple notifications
+            notificationManager.notify(randomNotificationId, notification);
+        }
+    }
 
     @Override
     /* There are two scenarios when onNewToken is called:
@@ -92,7 +95,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         super.onNewToken(newToken);
         Log.d(TAG, "New token: " + newToken);
         sendRegistrationToServer(newToken);
-    ***REMOVED***
+    }
 
     // Save and update new token to database server
     public static void sendRegistrationToServer(String newToken) {
@@ -107,6 +110,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     .setValue(token)
                     .addOnSuccessListener(unused -> Log.d(TAG, "sendRegistrationToServer onSuccess"))
                     .addOnFailureListener(e -> Log.e(TAG, "sendRegistrationToServer onFailure", e));
-        ***REMOVED*** else Log.w(TAG, "sendRegistrationToServer cancelled: no user logged in");
-    ***REMOVED***
-***REMOVED***
+        } else Log.w(TAG, "sendRegistrationToServer cancelled: no user logged in");
+    }
+}

@@ -42,11 +42,11 @@ public class LoginActivity extends AppCompatActivity {
                         try {
                             GoogleSignInAccount account = task.getResult(ApiException.class);
                             if (account != null) authWithGoogle(account);
-                        ***REMOVED*** catch (ApiException e){
+                        } catch (ApiException e){
                             Log.w(TAG, "Google sign in failed", e);
-                        ***REMOVED***
-                    ***REMOVED***
-                ***REMOVED***
+                        }
+                    }
+                }
         );
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -59,14 +59,14 @@ public class LoginActivity extends AppCompatActivity {
         binding.btnGoogle.setOnClickListener(view -> {
             Intent intentGoogle = googleSignInClient.getSignInIntent();
             someActivityResultLauncher.launch(intentGoogle);
-        ***REMOVED***);
-    ***REMOVED***
+        });
+    }
 
     private void authWithGoogle(GoogleSignInAccount account){
         Log.d(TAG, "authWithGoogle: " + account.getId());
         AuthCredential authCredential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
         authWithGoogle(authCredential);
-    ***REMOVED***
+    }
 
     public void authWithGoogle(AuthCredential authCredential){
         firebaseAuth.signInWithCredential(authCredential).addOnCompleteListener(task -> {
@@ -75,9 +75,9 @@ public class LoginActivity extends AppCompatActivity {
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
                 finish();
-            ***REMOVED*** else {
+            } else {
                 Log.w(TAG, "signInWithCredential: failure", task.getException());
-            ***REMOVED***
-        ***REMOVED***);
-    ***REMOVED***
-***REMOVED***
+            }
+        });
+    }
+}

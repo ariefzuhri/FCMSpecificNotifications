@@ -61,12 +61,12 @@ public class MainActivity extends AppCompatActivity {
         getToken();
 
         binding.edtUid.addTextChangedListener(new TextWatcher() {
-            @Override public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {***REMOVED***
-            @Override public void afterTextChanged(Editable editable) {***REMOVED***
+            @Override public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            @Override public void afterTextChanged(Editable editable) {}
             @Override public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 binding.btnSend.setEnabled(!charSequence.toString().isEmpty());
-            ***REMOVED***
-        ***REMOVED***);
+            }
+        });
 
         binding.btnSend.setEnabled(false);
         binding.btnSend.setOnClickListener(view -> {
@@ -74,23 +74,23 @@ public class MainActivity extends AppCompatActivity {
             String notificationTitle = "Hello";
             String notificationMessage = "You get a new notification";
             sendNotification(recipientId, notificationTitle, notificationMessage);
-        ***REMOVED***);
+        });
 
         binding.btnLogout.setOnClickListener(view -> logout());
 
         binding.edtUid.setText(UID_SAMPLE);
-    ***REMOVED***
+    }
 
     private void getToken() {
         FirebaseMessaging.getInstance().getToken().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 String token = task.getResult();
                 sendRegistrationToServer(token);
-            ***REMOVED*** else {
+            } else {
                 Log.w(TAG, "Fetching FCM registration token failed", task.getException());
-            ***REMOVED***
-        ***REMOVED***);
-    ***REMOVED***
+            }
+        });
+    }
 
     private void sendNotification(String recipientId, final String title, final String message) {
         Log.d(TAG, "sendNotification called");
@@ -116,29 +116,29 @@ public class MainActivity extends AppCompatActivity {
                                 if (response.code() == 200 && response.body() != null) {
                                     if (response.body().success != 1) {
                                         Log.w(TAG, "sendNotification onResponse: failed send notification");
-                                    ***REMOVED*** else {
+                                    } else {
                                         Log.d(TAG, "sendNotification onResponse: notification sent");
-                                    ***REMOVED***
-                                ***REMOVED*** else {
+                                    }
+                                } else {
                                     Log.w(TAG, "sendNotification onResponse: error code " + response.code());
-                                ***REMOVED***
-                            ***REMOVED***
+                                }
+                            }
 
                             @Override
                             public void onFailure(@NotNull Call<MyResponse> call, @NotNull Throwable t) {
                                 Log.e(TAG, "sendNotification onFailure", t);
-                            ***REMOVED***
-                        ***REMOVED***);
-                    ***REMOVED***
-                ***REMOVED***
-            ***REMOVED***
+                            }
+                        });
+                    }
+                }
+            }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Log.w(TAG, "sendNotification onCancelled", error.toException());
-            ***REMOVED***
-        ***REMOVED***);
-    ***REMOVED***
+            }
+        });
+    }
 
     private void logout() {
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -151,11 +151,11 @@ public class MainActivity extends AppCompatActivity {
         firebaseAuth.signOut();
 
         launchLogin();
-    ***REMOVED***
+    }
 
     private void launchLogin() {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         finish();
-    ***REMOVED***
-***REMOVED***
+    }
+}
