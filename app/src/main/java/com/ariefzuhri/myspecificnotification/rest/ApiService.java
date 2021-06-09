@@ -20,6 +20,5 @@ public interface ApiService {
     )
 
     @POST("fcm/send")
-    // Fungsi ini dipanggil ketika akan mengirim notifikasi (isi notifikasi dan token dibungkus dalam kelas Sender)
     Call<MyResponse> sendNotification(@Body Sender body);
 ***REMOVED***

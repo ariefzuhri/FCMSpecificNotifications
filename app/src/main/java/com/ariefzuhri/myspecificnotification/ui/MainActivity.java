@@ -37,11 +37,10 @@ import retrofit2.Response;
 
 import static com.ariefzuhri.myspecificnotification.service.MyFirebaseMessagingService.sendRegistrationToServer;
 
-// Dokumentasi: https://firebase.google.com/docs/cloud-messaging/http-server-ref
 public class MainActivity extends AppCompatActivity {
 
     private final String TAG = getClass().getSimpleName();
-    private static final String DUMMY_UID = "I8AyqX33p7b6OG1ltEo5eHd8eXL2";
+    private static final String UID_SAMPLE = "I8AyqX33p7b6OG1ltEo5eHd8eXL2"; // You can change with your UID here
 
     private ActivityMainBinding binding;
     private FirebaseAuth firebaseAuth;
@@ -57,7 +56,8 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // Dapatkan token untuk notifikasi
+        /* Get token as a recipient notification when onNewToken can't handle it
+        * because it requires an authenticated user*/
         getToken();
 
         binding.edtUid.addTextChangedListener(new TextWatcher() {
@@ -70,15 +70,15 @@ public class MainActivity extends AppCompatActivity {
 
         binding.btnSend.setEnabled(false);
         binding.btnSend.setOnClickListener(view -> {
-            String receiverId = binding.edtUid.getText().toString();
-            String notificationTitle = "Halo";
-            String notificationMessage = "Anda mendapatkan notif baru";
-            sendNotification(receiverId, notificationTitle, notificationMessage);
+            String recipientId = binding.edtUid.getText().toString();
+            String notificationTitle = "Hello";
+            String notificationMessage = "You get a new notification";
+            sendNotification(recipientId, notificationTitle, notificationMessage);
         ***REMOVED***);
 
         binding.btnLogout.setOnClickListener(view -> logout());
 
-        binding.edtUid.setText(DUMMY_UID);
+        binding.edtUid.setText(UID_SAMPLE);
     ***REMOVED***
 
     private void getToken() {
@@ -92,15 +92,15 @@ public class MainActivity extends AppCompatActivity {
         ***REMOVED***);
     ***REMOVED***
 
-    private void sendNotification(String receiverUid, final String title, final String message) {
+    private void sendNotification(String recipientId, final String title, final String message) {
         Log.d(TAG, "sendNotification called");
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("token");
-        // Muat token si penerima berdasarkan id pengguna
-        Query query = reference.orderByKey().equalTo(receiverUid);
+        // Get recipient token based on user id
+        Query query = reference.orderByKey().equalTo(recipientId);
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Log.d(TAG, "sendNotification onDataChange: success get receiver token (" + dataSnapshot.getChildrenCount() + ")");
+                Log.d(TAG, "sendNotification onDataChange: success get recipient token (" + dataSnapshot.getChildrenCount() + ")");
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Token token = snapshot.getValue(Token.class);
 

@@ -1,10 +1,10 @@
 package com.ariefzuhri.myspecificnotification.model;
 
-// Representasi dari token
 public class Token {
 
     private String token;
 
+    @SuppressWarnings("unused")
     public Token() {
         // Required empty constructor for Firebase
     ***REMOVED***

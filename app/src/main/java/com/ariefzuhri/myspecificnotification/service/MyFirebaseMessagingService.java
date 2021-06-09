@@ -25,14 +25,16 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
-// Kelas ini menangani penerimaan notifikasi
+import java.util.Random;
+
+/* Read the documentation here: https://firebase.google.com/docs/reference/fcm/rest/v1/projects.messages
+ * FCM HTTP protocol: https://firebase.google.com/docs/cloud-messaging/http-server-ref*/
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private static final String TAG = MyFirebaseMessagingService.class.getSimpleName();
-    public static final int REQUEST_MY_NOTIFICATION = 100;
 
-    /* Kelas ini merupakan kelas service yang berjalan di latar belakang
-    mendeteksi setiap ada notifikasi baru yang diterima*/
+    /* This class is a service class that runs in the background,
+     * detecting every time a new notification is received*/
     @Override
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
@@ -40,31 +42,36 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     ***REMOVED***
 
     private void showNotification(RemoteMessage remoteMessage) {
-        String CHANNEL_ID = "channel_01";
-        String CHANNEL_NAME = "Notifikasi baru";
+        String channelId = "channel_new_notification";
+        String channelName = "New notification";
 
         String title = remoteMessage.getData().get("title");
         String message = remoteMessage.getData().get("message");
 
         Intent intent = new Intent(this, MainActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, REQUEST_MY_NOTIFICATION, intent, PendingIntent.FLAG_ONE_SHOT);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this,
+                0, intent, 0); // or use PendingIntent.FLAG_ONE_SHOT
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, channelId)
                 .setContentIntent(pendingIntent)
                 .setSmallIcon(R.drawable.ic_notifications)
                 .setContentTitle(title)
                 .setContentText(message)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(message))
                 .setColor(ContextCompat.getColor(this, android.R.color.transparent))
+                //.setVibrate(new long[]{1000, 1000, 1000, 1000, 1000***REMOVED***)
                 .setSound(defaultSoundUri)
                 .setAutoCancel(true);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID,
-                    CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH);
-            builder.setChannelId(CHANNEL_ID);
+            NotificationChannel notificationChannel = new NotificationChannel(channelId,
+                    channelName, NotificationManager.IMPORTANCE_HIGH); // You can change notification priority here
+            //channel.enableVibration(true);
+            //channel.setVibrationPattern(new long[]{1000, 1000, 1000, 1000, 1000***REMOVED***);
+            builder.setChannelId(channelId);
             if (notificationManager != null)
                 notificationManager.createNotificationChannel(notificationChannel);
         ***REMOVED***
@@ -74,25 +81,23 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     ***REMOVED***
 
     @Override
-    /* Menangani setiap ada perubahan token (identifier dari perangkat tertentu)
-    Ada 2 skenario fungsi ini dipanggil:
-    1) Ada token baru yang dibuat saat pertama kali launch
-    2) Setiap token berubah
-    Ada 3 skenario token dapat berubah:
-    A) Perangkat baru
-    B) Instal ulang
-    C) Setelah membersihkan app data*/
+    /* There are two scenarios when onNewToken is called:
+    * 1) When a new token is generated on initial app startup
+    * 2) Whenever an existing token is changed
+    * Under #2, there are three scenarios when the existing token is changed:
+    * A) App is restored to a new device
+    * B) User uninstalls/reinstalls the app
+    * C) User clears app data*/
     public void onNewToken(@NonNull String newToken) {
         super.onNewToken(newToken);
         Log.d(TAG, "New token: " + newToken);
         sendRegistrationToServer(newToken);
     ***REMOVED***
 
-    // Simpan dan perbarui token baru ke database server
+    // Save and update new token to database server
     public static void sendRegistrationToServer(String newToken) {
         Log.d(TAG, "sendRegistrationToServer called: " + newToken);
-        /* Token ini dikueri saat akan mengirimkan notifikasi
-        sebagai penerima notifikasi*/
+        // This token is required as a notification receiver
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
         if (firebaseUser != null){

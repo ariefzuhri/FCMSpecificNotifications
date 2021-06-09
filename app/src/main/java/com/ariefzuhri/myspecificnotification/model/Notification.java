@@ -1,6 +1,5 @@
 package com.ariefzuhri.myspecificnotification.model;
 
-// Representasi dari isi notifikasi
 public class Notification {
 
     final String title;

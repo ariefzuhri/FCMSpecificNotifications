@@ -1,11 +1,11 @@
 package com.ariefzuhri.myspecificnotification.model;
 
-// Membawa isi notifikasi dan token si penerima
+// Brings the notification and the recipient's token
 public class Sender {
 
-    // Jangan ubah nama kolom agar bisa diurai sebagai JSON
+    // Don't rename the columns to parse as JSON
     public final Notification data;
-    public final String to; // receiver token
+    public final String to; // Recipient tokens
 
     public Sender(Notification data, String to) {
         this.data = data;
