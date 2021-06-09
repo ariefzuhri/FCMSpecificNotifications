@@ -31,13 +31,12 @@ task clean(type: Delete) {
 }
 
 ext {
-    // Dependencies version
     appCompatVersion = '1.3.0'
     materialVersion = '1.3.0'
     constraintLayoutVersion = '2.0.4'
 
     junitVersion = '4.13.2'
-    junitExtversion = '1.1.2'
+    junitExtVersion = '1.1.2'
     espressoVersion = '3.3.0'
 
     retrofitVersion = '2.9.0'
