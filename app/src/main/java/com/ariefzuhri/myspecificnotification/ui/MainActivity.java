@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
         /* Get token as a recipient notification when onNewToken can't handle it
         * because it requires an authenticated user*/
-        getToken();
+        getFCMToken();
 
         binding.edtUid.addTextChangedListener(new TextWatcher() {
             @Override public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         binding.edtUid.setText(UID_SAMPLE);
     }
 
-    private void getToken() {
+    private void getFCMToken() {
         FirebaseMessaging.getInstance().getToken().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 String token = task.getResult();
