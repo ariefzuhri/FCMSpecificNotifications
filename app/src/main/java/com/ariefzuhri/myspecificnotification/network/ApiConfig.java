@@ -1,17 +1,23 @@
-package com.ariefzuhri.myspecificnotification.rest;
+package com.ariefzuhri.myspecificnotification.network;
+
+import static com.ariefzuhri.myspecificnotification.BuildConfig.FCM_BASE_URL;
 
 import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static com.ariefzuhri.myspecificnotification.utils.Constants.FCM_BASE_URL;
+import android.content.Context;
+
+import androidx.annotation.NonNull;
+
+import com.chuckerteam.chucker.api.ChuckerInterceptor;
 
 public class ApiConfig {
 
-    public static ApiService getApiService(){
-        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor()
-                .setLevel(HttpLoggingInterceptor.Level.BODY);
+    @NonNull
+    public static ApiService getApiService(Context context) {
+        ChuckerInterceptor loggingInterceptor = new ChuckerInterceptor.Builder(context)
+                .build();
 
         OkHttpClient client = new OkHttpClient.Builder()
                 .addInterceptor(loggingInterceptor)

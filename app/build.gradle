@@ -20,7 +20,11 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String" , "SERVER_KEY" , localProperties['firebaseServerKey'])
+        buildConfigField("String", "FCM_BASE_URL", '"https://fcm.googleapis.com"')
+        buildConfigField("String", "FIREBASE_SERVER_KEY", localProperties['firebaseServerKey'])
+
+        resValue("string", "fcm_default_notification_channel_id", "fcm_default_channel")
+        resValue("string", "fcm_default_notification_channel_name", "New notification")
     }
 
     buildTypes {
@@ -58,7 +62,8 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
 
     // Network logging
-    implementation "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
+    debugImplementation "com.github.chuckerteam.chucker:library:$chuckerVersion"
+    releaseImplementation "com.github.chuckerteam.chucker:library-no-op:$chuckerVersion"
 
     // Firebase
     implementation platform("com.google.firebase:firebase-bom:$firebaseVersion")
@@ -67,5 +72,7 @@ dependencies {
     implementation "com.google.firebase:firebase-core"
     implementation "com.google.firebase:firebase-database"
     implementation "com.google.firebase:firebase-messaging"
+
+    // Play services
     implementation "com.google.android.gms:play-services-auth:$playServicesAuthVersion"
 }
