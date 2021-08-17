@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.MainActivity"
-    android:padding="16dp"
+    android:gravity="center"
     android:orientation="vertical"
-    android:gravity="center">
+    android:padding="16dp"
+    tools:context=".ui.MainActivity">
 
     <EditText
         android:id="@+id/edt_uid"
@@ -17,15 +16,25 @@
         android:inputType="text"
         tools:ignore="Autofill" />
 
+    <EditText
+        android:id="@+id/edt_extra_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_extra_data"
+        android:inputType="text"
+        android:text="@string/sample_extra_data"
+        tools:ignore="Autofill" />
+
     <Button
         android:id="@+id/btn_send"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/send_notification"/>
+        android:text="@string/send_notification" />
 
     <Button
         android:id="@+id/btn_logout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/logout"/>
+        android:text="@string/logout" />
+
 </LinearLayout>

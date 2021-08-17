@@ -1,5 +1,6 @@
 package com.ariefzuhri.myspecificnotification.service;
 
+import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -16,44 +17,54 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
 import com.ariefzuhri.myspecificnotification.R;
-import com.ariefzuhri.myspecificnotification.model.Token;
-import com.ariefzuhri.myspecificnotification.ui.MainActivity;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.ariefzuhri.myspecificnotification.utils.FcmUtils;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 import java.util.Random;
 
+import static com.ariefzuhri.myspecificnotification.utils.Constants.EXTRA_MESSAGE;
+
 /* Read the documentation here: https://firebase.google.com/docs/reference/fcm/rest/v1/projects.messages
- * FCM HTTP protocol: https://firebase.google.com/docs/cloud-messaging/http-server-ref*/
+ * FCM HTTP protocol: https://firebase.google.com/docs/cloud-messaging/http-server-ref */
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private static final String TAG = MyFirebaseMessagingService.class.getSimpleName();
 
     /* This class is a service class that runs in the background,
-     * detecting every time a new notification is received*/
+     * detecting every time a new notification is received */
     @Override
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
+        // If you don't receive a notification, please check the topic subscription
         super.onMessageReceived(remoteMessage);
         showNotification(remoteMessage);
     }
 
-    private void showNotification(RemoteMessage remoteMessage) {
-        String channelId = "channel_new_notification";
-        String channelName = "New notification";
+    private void showNotification(@NonNull RemoteMessage remoteMessage) {
+        String channelId = getString(R.string.fcm_default_notification_channel_id);
+        String channelName = getString(R.string.fcm_default_notification_channel_name);
 
-        String title = remoteMessage.getData().get("title");
-        String message = remoteMessage.getData().get("message");
+        String title = "";
+        String message = "";
+        String clickAction = "";
 
-        Intent intent = new Intent(this, MainActivity.class);
+        // Get messages from getNotification()
+        if (remoteMessage.getNotification() != null) {
+            title = remoteMessage.getNotification().getTitle();
+            message = remoteMessage.getNotification().getBody();
+            clickAction = remoteMessage.getNotification().getClickAction();
+        }
+
+        // Get extras from getData()
+        String extraMessage = remoteMessage.getData().get("extraMessage");
+
+        // Don't forget to add intent filter for intent action in your manifest
+        Intent intent = new Intent(clickAction);
+        intent.putExtra(EXTRA_MESSAGE, extraMessage);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this,
-                0, intent, 0); // or use PendingIntent.FLAG_ONE_SHOT
+        @SuppressLint("UnspecifiedImmutableFlag") PendingIntent pendingIntent = PendingIntent
+                .getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
 
-        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, channelId)
                 .setContentIntent(pendingIntent)
@@ -62,15 +73,13 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 .setContentText(message)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(message))
                 .setColor(ContextCompat.getColor(this, android.R.color.transparent))
-                //.setVibrate(new long[]{1000, 1000, 1000, 1000, 1000})
                 .setSound(defaultSoundUri)
                 .setAutoCancel(true);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel notificationChannel = new NotificationChannel(channelId,
-                    channelName, NotificationManager.IMPORTANCE_HIGH); // You can change notification priority here
-            //channel.enableVibration(true);
-            //channel.setVibrationPattern(new long[]{1000, 1000, 1000, 1000, 1000});
+                    channelName, remoteMessage.getPriority());
             builder.setChannelId(channelId);
             if (notificationManager != null)
                 notificationManager.createNotificationChannel(notificationChannel);
@@ -78,38 +87,22 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         Notification notification = builder.build();
         if (notificationManager != null) {
-            int randomNotificationId = new Random().nextInt(); // Keep multiple notifications
-            notificationManager.notify(randomNotificationId, notification);
+            int notificationId = new Random().nextInt(); // Keep multiple notifications
+            notificationManager.notify(notificationId, notification);
         }
     }
 
-    @Override
     /* There are two scenarios when onNewToken is called:
-    * 1) When a new token is generated on initial app startup
-    * 2) Whenever an existing token is changed
-    * Under #2, there are three scenarios when the existing token is changed:
-    * A) App is restored to a new device
-    * B) User uninstalls/reinstalls the app
-    * C) User clears app data*/
+     * 1) When a new token is generated on initial app startup
+     * 2) Whenever an existing token is changed
+     * Under #2, there are three scenarios when the existing token is changed:
+     * A) App is restored to a new device
+     * B) User uninstalls/reinstalls the app
+     * C) User clears app data */
+    @Override
     public void onNewToken(@NonNull String newToken) {
         super.onNewToken(newToken);
-        Log.d(TAG, "New token: " + newToken);
-        sendRegistrationToServer(newToken);
-    }
-
-    // Save and update new token to database server
-    public static void sendRegistrationToServer(String newToken) {
-        Log.d(TAG, "sendRegistrationToServer called: " + newToken);
-        // This token is required as a notification receiver
-        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-
-        if (firebaseUser != null){
-            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("token");
-            Token token = new Token(newToken);
-            databaseReference.child(firebaseUser.getUid())
-                    .setValue(token)
-                    .addOnSuccessListener(unused -> Log.d(TAG, "sendRegistrationToServer onSuccess"))
-                    .addOnFailureListener(e -> Log.e(TAG, "sendRegistrationToServer onFailure", e));
-        } else Log.w(TAG, "sendRegistrationToServer cancelled: no user logged in");
+        Log.d(TAG, "Refreshed token: " + newToken);
+        FcmUtils.sendRegistrationToServer(newToken);
     }
 }

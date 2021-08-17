@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">MySpecificNotification</string>
-    <string name="hint_uid">Masukkan UID tujuan</string>
-    <string name="send_notification">Kirim notifikasi</string>
-    <string name="logout">Keluar</string>
+    <string name="hint_uid">Enter the recipient\'s UID</string>
+    <string name="send_notification">Send notification</string>
+    <string name="logout">Logout</string>
+    <string name="hint_receive_extra_data">Your extra data will be shown here</string>
+    <string name="hint_extra_data">This is extra message to send with notification</string>
+    <string name="sample_extra_data">Hello extra data</string>
 </resources>

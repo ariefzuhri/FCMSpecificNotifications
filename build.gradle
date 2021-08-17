@@ -40,7 +40,7 @@ ext {
     espressoVersion = '3.4.0'
 
     retrofitVersion = '2.9.0'
-    okhttpVersion = '4.9.0'
+    chuckerVersion = '3.5.2'
 
     firebaseVersion = '28.3.0'
     playServicesAuthVersion = '19.2.0'
