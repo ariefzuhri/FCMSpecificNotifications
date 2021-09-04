@@ -45,6 +45,6 @@ ext {
     retrofitVersion = '2.9.0'
     chuckerVersion = '3.5.2'
 
-    firebaseVersion = '28.3.0'
+    firebaseVersion = '28.4.0'
     playServicesAuthVersion = '19.2.0'
 }
