@@ -13,9 +13,9 @@ import android.app.NotificationManager
 import android.os.Build
 import android.app.NotificationChannel
 import android.util.Log
-import com.ariefzuhri.myspecificnotification.utils.EXTRA_MESSAGE
-import com.ariefzuhri.myspecificnotification.utils.TAG
-import com.ariefzuhri.myspecificnotification.utils.sendRegistrationToServer
+import com.ariefzuhri.myspecificnotification.util.EXTRA_MESSAGE
+import com.ariefzuhri.myspecificnotification.util.TAG
+import com.ariefzuhri.myspecificnotification.util.sendRegistrationToServer
 import java.util.*
 
 /**

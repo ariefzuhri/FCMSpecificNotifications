@@ -1,9 +1,9 @@
-package com.ariefzuhri.myspecificnotification.network
+package com.ariefzuhri.myspecificnotification.data.network
 
-import com.ariefzuhri.myspecificnotification.response.FcmResponse
+import com.ariefzuhri.myspecificnotification.data.response.FcmResponse
 import retrofit2.http.POST
 import com.ariefzuhri.myspecificnotification.BuildConfig
-import com.ariefzuhri.myspecificnotification.model.Message
+import com.ariefzuhri.myspecificnotification.data.model.Message
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.Headers

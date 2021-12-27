@@ -16,19 +16,25 @@ import com.google.firebase.auth.AuthResult
 import android.util.Log
 import androidx.activity.result.ActivityResult
 import com.ariefzuhri.myspecificnotification.databinding.ActivityLoginBinding
-import com.ariefzuhri.myspecificnotification.utils.TAG
+import com.ariefzuhri.myspecificnotification.util.TAG
 import com.google.android.gms.tasks.Task
 
-// Simple authentication with Firebase
+// Simple authentication using Firebase
 class LoginActivity : AppCompatActivity() {
 
-    private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var binding: ActivityLoginBinding
+
+    private val firebaseAuth by lazy { FirebaseAuth.getInstance() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivityLoginBinding.inflate(layoutInflater)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        initAuth()
+    }
+
+    private fun initAuth() {
         val someActivityResultLauncher = registerForActivityResult(
             StartActivityForResult()
         ) { result: ActivityResult ->
@@ -43,8 +49,6 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         }
-
-        firebaseAuth = FirebaseAuth.getInstance()
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))

@@ -10,11 +10,11 @@ import com.ariefzuhri.myspecificnotification.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import android.content.Intent
 import com.ariefzuhri.myspecificnotification.databinding.ActivityMainBinding
-import com.ariefzuhri.myspecificnotification.model.Data
-import com.ariefzuhri.myspecificnotification.utils.registerToken
-import com.ariefzuhri.myspecificnotification.utils.sendNotification
-import com.ariefzuhri.myspecificnotification.utils.subscribeToTopic
-import com.ariefzuhri.myspecificnotification.utils.unsubscribeFromTopic
+import com.ariefzuhri.myspecificnotification.data.model.Data
+import com.ariefzuhri.myspecificnotification.util.registerToken
+import com.ariefzuhri.myspecificnotification.util.sendNotification
+import com.ariefzuhri.myspecificnotification.util.subscribeToTopic
+import com.ariefzuhri.myspecificnotification.util.unsubscribeFromTopic
 
 /**
  * App features:
@@ -30,14 +30,13 @@ private const val UID_SAMPLE = "I8AyqX33p7b6OG1ltEo5eHd8eXL2"
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var firebaseAuth: FirebaseAuth
+
+    private val firebaseAuth by lazy { FirebaseAuth.getInstance() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        firebaseAuth = FirebaseAuth.getInstance()
-        val currentUser = firebaseAuth.currentUser
-        if (currentUser == null) launchLogin()
+        checkLoggedInUser()
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -55,23 +54,51 @@ class MainActivity : AppCompatActivity() {
         subscribeToTopic("news")
         unsubscribeFromTopic("news")
 
-        binding.edtUid.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
-            override fun afterTextChanged(editable: Editable) {}
-            override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
-                binding.btnSend.isEnabled = charSequence.toString().isNotEmpty()
+        initViews()
+    }
+
+    private fun checkLoggedInUser() {
+        val currentUser = firebaseAuth.currentUser
+        if (currentUser == null) launchLogin()
+    }
+
+    private fun initViews() {
+        binding.apply {
+            edtUid.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(
+                    charSequence: CharSequence, i: Int, i1: Int, i2: Int,
+                ) {
+
+                }
+
+                override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
+                    btnSend.isEnabled = charSequence.toString().isNotEmpty()
+                }
+
+                override fun afterTextChanged(editable: Editable) {
+
+                }
+            })
+
+            btnSend.isEnabled = false
+            btnSend.setOnClickListener {
+                val recipientId = edtUid.text.toString()
+                val notificationTitle = "Hello, World!"
+                val notificationMessage = "You get a new notification"
+                val data = Data(edtExtraData.text.toString())
+
+                sendNotification(
+                    this@MainActivity,
+                    recipientId,
+                    notificationTitle, notificationMessage,
+                    data
+                )
             }
-        })
-        binding.btnSend.isEnabled = false
-        binding.btnSend.setOnClickListener {
-            val recipientId = binding.edtUid.text.toString()
-            val notificationTitle = "Hello, World!"
-            val notificationMessage = "You get a new notification"
-            val data = Data(binding.edtExtraData.text.toString())
-            sendNotification(this, recipientId, notificationTitle, notificationMessage, data)
+
+            btnLogout.setOnClickListener { logout() }
+
+            edtUid.setText(UID_SAMPLE)
         }
-        binding.btnLogout.setOnClickListener { logout() }
-        binding.edtUid.setText(UID_SAMPLE)
     }
 
     private fun logout() {
