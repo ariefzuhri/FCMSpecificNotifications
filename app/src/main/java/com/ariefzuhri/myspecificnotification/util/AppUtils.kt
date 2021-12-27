@@ -1,4 +1,4 @@
-package com.ariefzuhri.myspecificnotification.utils
+package com.ariefzuhri.myspecificnotification.util
 
 import android.os.Build
 

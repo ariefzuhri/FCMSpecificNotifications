@@ -1,4 +1,4 @@
-package com.ariefzuhri.myspecificnotification.network
+package com.ariefzuhri.myspecificnotification.data.network
 
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import okhttp3.OkHttpClient

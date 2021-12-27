@@ -5,8 +5,14 @@ plugins {
 }
 
 def localPropertiesFile = rootProject.file("local.properties")
-def localProperties = new Properties()
-localProperties.load(new FileInputStream(localPropertiesFile))
+project.ext.localProperties = new Properties()
+if (localPropertiesFile.canRead()) {
+    localProperties.load(new FileInputStream(localPropertiesFile))
+}
+
+def getLocalProperty(String key) {
+    return "\"${System.getenv(key) ?: project.localProperties[key]}\""
+}
 
 android {
     compileSdk 31
@@ -20,8 +26,8 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "FCM_BASE_URL", '"https://fcm.googleapis.com"')
-        buildConfigField("String", "FIREBASE_SERVER_KEY", localProperties['firebaseServerKey'])
+        buildConfigField("String", "FCM_BASE_URL", getLocalProperty("fcm.base.url"))
+        buildConfigField("String", "FIREBASE_SERVER_KEY", getLocalProperty("firebase.server.key"))
 
         resValue("string", "fcm_default_notification_channel_id", "fcm_default_channel")
         resValue("string", "fcm_default_notification_channel_name", "New notification")
@@ -30,7 +36,9 @@ android {
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile(
+                    'proguard-android-optimize.txt'
+            ), 'proguard-rules.pro'
         }
     }
 

@@ -1,19 +1,19 @@
-package com.ariefzuhri.myspecificnotification.utils
+package com.ariefzuhri.myspecificnotification.util
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.DataSnapshot
-import com.ariefzuhri.myspecificnotification.response.FcmResponse
-import com.ariefzuhri.myspecificnotification.network.ApiConfig
+import com.ariefzuhri.myspecificnotification.data.response.FcmResponse
+import com.ariefzuhri.myspecificnotification.data.network.ApiConfig
 import com.google.firebase.database.DatabaseError
 import android.content.Context
 import android.util.Log
-import com.ariefzuhri.myspecificnotification.model.Data
-import com.ariefzuhri.myspecificnotification.model.Message
-import com.ariefzuhri.myspecificnotification.model.Notification
-import com.ariefzuhri.myspecificnotification.model.Token
+import com.ariefzuhri.myspecificnotification.data.model.Data
+import com.ariefzuhri.myspecificnotification.data.model.Message
+import com.ariefzuhri.myspecificnotification.data.model.Notification
+import com.ariefzuhri.myspecificnotification.data.model.Token
 import com.google.android.gms.tasks.Task
 import retrofit2.Call
 import retrofit2.Callback
@@ -21,7 +21,8 @@ import retrofit2.Response
 
 /**
  * - Get the specific token if you want to send push notifications to a specific user
- * - Subscribe to related topics from your device if you want to get push notifications with a specific topic */
+ * - Subscribe to related topics from your device if you want to get push notifications with a specific topic
+ */
 
 private const val TAG = "FcmUtils"
 
