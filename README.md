@@ -60,7 +60,7 @@ Give a ⭐️ if you like this project.
 This project is licensed under the MIT License. See the [`LICENSE`](https://github.com/ariefzuhri/FCMSpecificNotifications/blob/master/LICENSE) file for details.
 
 ## Acknowledgments
-This idea inspired by [KOD Dev](https://www.youtube.com/playlist?list=PLzLFqCABnRQftQQETzoVMuteXzNiXmnj8).
+This idea is inspired by [KOD Dev](https://www.youtube.com/playlist?list=PLzLFqCABnRQftQQETzoVMuteXzNiXmnj8).
 
 [release-shield]: https://img.shields.io/github/v/release/ariefzuhri/FCMSpecificNotifications?include_prereleases&style=for-the-badge
 [release-url]: https://github.com/ariefzuhri/FCMSpecificNotifications/releases
