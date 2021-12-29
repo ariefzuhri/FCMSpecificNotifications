@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MySpecificNotification</string>
+    <string name="app_name">FCM Specific Notifications</string>
     <string name="hint_uid">Enter the recipient\'s UID</string>
     <string name="send_notification">Send notification</string>
     <string name="logout">Logout</string>
